@@ -27,7 +27,7 @@ The model chosen was a DecisionTreeClassifier with the only hyperparameter being
 
 There is 1 nominal feature (‘side’) and 6 quantitative features (‘kills’, ‘deaths’, ‘assists’, ‘dragons’, ‘barons’, ‘visionscore’). The quantitative columns were left mostly alone with the main change being the data types to their appropriate encodings. The ‘side’ feature was one-hot encoded with ‘Blue’ represented as 1 and ‘Red’ represented as 0.
 
-**ADD MODEL PERFORMANCE**
+After the model was fit on the training data, the accuracy score on the training data was ~0.892 while the accuracy score on the test data was ~0.889. While the model’s accuracy was not groundbreaking, the model is not “bad”. This is because the model’s accuracy score on the test data was only a little behind the accuracy score of the training data. This means that the model does well with unseen data, and with some changes, the accuracy score can increase.
 
 # Final Model
 
@@ -43,13 +43,22 @@ The last new feature that was created was using the KBinsDiscretizer from sklear
 
 KBinsDiscretizer was used to solve this problem by binning the data into categories so that outliers weigh the same as any other data point.
 
+These new features should help increase accuracy score by making sure the data weighs similarly to each other. This is so that when the model is making predictions, the classification does not get drawn towards one side of the tree because of one data point but rather relies on all of the data points as a whole.
+
 The model chosen was still the DecisionTreeClassifier. To find the best hyperparameters, GridSearchCV was used with the cross-validation being set to 5. The following hyperparameters were explored:
 - max_depth: To find how tall the tree should be in order to make a classification,
 - min_samples_split: To find the minimum number of samples to split a node so that classifications are not made with a certain amount of data,
 - criterion: To find the best criterion to split a node, and
 - splitter: To find how to best split the features to split a node.
 
-**ADD MODEL PERFORMANCE AND HYPERPARAMETERS**
+The hyperparameters that optimized the model the best were:
+- max_depth = 8,
+- min_samples_split = 20,
+- criterion = ‘entropy’, and
+- splitter = ‘best’.
+
+
+After the model was fit on the training data, the accuracy score on the training data was ~0.964 while the accuracy score on the test data was ~0.956. This is an obvious increase in performance of the model as the accuracy score increased in both the training and test data. As explained earlier, the new features have a part in this increase in performance by keeping the weights of the data similar. The optimized hyperparameters were also a factor in the improvement. With the increase to max_depth, the tree is able to classify data to a better degree since the decisions it makes are more specific. The other hyperparameters were not used in the baseline model, and with their introductions into the final model, also ensure that the tree is splitting correctly and not splitting when there is not enough data.
 
 <img src="assets/confusion-matrix.png" width=600 height=450>
 
