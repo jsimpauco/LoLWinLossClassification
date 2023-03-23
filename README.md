@@ -20,6 +20,14 @@ The model chosen was a DecisionTreeClassifier with the only hyperparameter being
 - ‘barons’: The total number of barons killed by the team, and
 - ‘visionscore’: The collective sum of all 5 players visionscore.
 
+|   side |   kills |   deaths |   assists |   dragons |   barons |   visionscore |   result |
+|-------:|--------:|---------:|----------:|----------:|---------:|--------------:|---------:|
+|      1 |       9 |       19 |        19 |         1 |        0 |           197 |        0 |
+|      0 |      19 |        9 |        62 |         3 |        0 |           205 |        1 |
+|      1 |       3 |       16 |         7 |         1 |        0 |           277 |        0 |
+|      0 |      16 |        3 |        39 |         4 |        2 |           346 |        1 |
+|      1 |      13 |        6 |        35 |         2 |        1 |           162 |        1 |
+
 There is 1 nominal feature (‘side’) and 6 quantitative features (‘kills’, ‘deaths’, ‘assists’, ‘dragons’, ‘barons’, ‘visionscore’). The quantitative columns were left mostly alone with the main change being the data types to their appropriate encodings. The ‘side’ feature was one-hot encoded with ‘Blue’ represented as 1 and ‘Red’ represented as 0.
 
 **ADD MODEL PERFORMANCE**
@@ -45,6 +53,9 @@ The model chosen was still the DecisionTreeClassifier. To find the best hyperpar
 - splitter: To find how to best split the features to split a node.
 
 **ADD MODEL PERFORMANCE AND HYPERPARAMETERS**
+
+**ADD CONFUSION MATRIX**
+
 
 # Fairness Analysis
 
