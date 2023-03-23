@@ -39,7 +39,7 @@ The RobustScaler was used to remedy this to ensure that extreme numbers are not 
 
 The last new feature that was created was using the KBinsDiscretizer from sklearn on ‘visionscore’. The reasoning behind this was when drawn on a histogram, ‘visionscore’ was roughly normally distributed but had a lot of outliers.
 
-<iframe src="assets/visionscore-hist.html" width=800 height=600 frameBorder></iframe>
+<iframe src="assets/visionscore-hist.html" width=650 height=450 frameBorder></iframe>
 
 KBinsDiscretizer was used to solve this problem by binning the data into categories so that outliers weigh the same as any other data point.
 
