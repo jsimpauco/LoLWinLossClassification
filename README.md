@@ -1,6 +1,3 @@
-# LoLWinLossClassification
-Project for DSC80 at UCSD
-
 *An exploratory analysis of the dataset can be accessed [here](https://jsimpauco.github.io/LoLSupportsVsJunglers/).*
 
 # Problem Identification
@@ -36,7 +33,7 @@ There is 1 nominal feature (‘side’) and 6 quantitative features (‘kills’
 
 While creating the final model, four new features were added. Three of them consisted of using the RobustScaler from sklearn on ‘kills’, ‘deaths’, and ‘barons’. The reasoning for this was when drawn on a histogram, the distributions for each feature were all positively skewed. Also, when looking at the relation between the features and ‘result’, there was an obvious difference between the distributions.
 
-<iframe src="assets/kills-hist.html" width=800 height=600 frameBorder></iframe>
+<iframe src="assets/kills-hist.html" width=600 height=400 frameBorder></iframe>
 
 The RobustScaler was used to remedy this to ensure that extreme numbers are not automatically seen as a certain result. RobustScaler was used instead of StandardScaler to account for outliers since RobustScaler uses median and interquartile range within its calculations in comparison to the mean and standard deviation which are both affected by outliers.
 
