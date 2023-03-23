@@ -75,4 +75,4 @@ With the test statistic being accuracy score, the significance level is set at 0
 
 <iframe src="assets/perm-fig.html" width=650 height=450 frameBorder=0></iframe>
 
-The resulting p-value is 0.0 and thus the null hypothesis is rejected. Based on these results, we can infer that the model can be more accurate towards data that contains single digits in kills. This is probably caused by the lower kill counts usually resulting in losses within the data. In contrast, some of the mid-range kill counts can be classified as either a loss or a win. This mid-range may cause the model to be inaccurate, resulting in the calculated p-value.
+The resulting p-value is 0.0 and thus the null hypothesis is rejected. Based on these results, we can infer that the model can be more accurate towards data that contains single digits in kills. This is probably caused by the lower kill counts usually resulting in losses within the dataset. In contrast, some of the mid-range kill counts can be classified as either a loss or a win. This mid-range may cause the model to be inaccurate, resulting in the calculated p-value.
