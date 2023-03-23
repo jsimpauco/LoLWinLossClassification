@@ -33,13 +33,13 @@ There is 1 nominal feature (‘side’) and 6 quantitative features (‘kills’
 
 While creating the final model, four new features were added. Three of them consisted of using the RobustScaler from sklearn on ‘kills’, ‘deaths’, and ‘barons’. The reasoning for this was when drawn on a histogram, the distributions for each feature were all positively skewed. Also, when looking at the relation between the features and ‘result’, there was an obvious difference between the distributions.
 
-<iframe src="assets/kills-hist.html" width=600 height=400 frameBorder></iframe>
+<iframe src="assets/kills-hist.html" width=650 height=450 frameBorder=0></iframe>
 
 The RobustScaler was used to remedy this to ensure that extreme numbers are not automatically seen as a certain result. RobustScaler was used instead of StandardScaler to account for outliers since RobustScaler uses median and interquartile range within its calculations in comparison to the mean and standard deviation which are both affected by outliers.
 
 The last new feature that was created was using the KBinsDiscretizer from sklearn on ‘visionscore’. The reasoning behind this was when drawn on a histogram, ‘visionscore’ was roughly normally distributed but had a lot of outliers.
 
-<iframe src="assets/visionscore-hist.html" width=650 height=450 frameBorder></iframe>
+<iframe src="assets/visionscore-hist.html" width=650 height=450 frameBorder=0></iframe>
 
 KBinsDiscretizer was used to solve this problem by binning the data into categories so that outliers weigh the same as any other data point.
 
@@ -51,7 +51,7 @@ The model chosen was still the DecisionTreeClassifier. To find the best hyperpar
 
 **ADD MODEL PERFORMANCE AND HYPERPARAMETERS**
 
-![Confusion Matrix for Final Model](./assets/confusion-matrix.png)
+<img src="assets/confusion-matrix.png" width=650 height=450>
 
 
 # Fairness Analysis
@@ -66,6 +66,6 @@ For the fairness analysis, the two groups were as follows:
 
 With the test statistic being accuracy score, the significance level is set at 0.05.
 
-<iframe src="assets/perm-fig.html" width=800 height=600 frameBorder></iframe>
+<iframe src="assets/perm-fig.html" width=650 height=450 frameBorder=0></iframe>
 
 The resulting p-value is 0.0 and thus the null hypothesis is rejected. Based on these results, we can infer that the model can be more accurate towards data that contains single digits in kills. This is probably caused by the lower kill counts usually resulting in losses. In contrast, some of the mid-range kill counts can be classified as either a loss or a win. This mid-range may cause the model to be inaccurate, resulting in the calculated p-value.
