@@ -4,7 +4,7 @@
 
 With the dataset containing statistics from professional League of Legends games played in 2022, the following question is proposed: Given a team’s stats after a single competitive game, can we predict if the team won (or lost) the match? 
 
-This type of prediction problem is a binary classification problem with the outcomes being a win (represented as 1 in the dataset) or a loss (0 otherwise). The ‘result’ is the response variable in this proposal. It was chosen because players care the most about winning/losing a game, and thus was a higher priority to predict. The metric that will be used to evaluate the model will be accuracy score. Accuracy score was chosen over F1-score since there are no class imbalances and both false positives and false negatives are equally bad for the model. The features used will be statistics that will be known at the end of the game, meaning that the time of prediction will allow for most of the data from the dataset to be used.
+This type of prediction problem is a binary classification problem with the outcomes being a win (represented as 1 in the dataset) or a loss (0 otherwise). The ‘result’ is the response variable in this proposal. It was chosen because players care the most about winning/losing a game, and thus was a higher priority to predict. The metric that will be used to evaluate the model will be accuracy score. Accuracy score was chosen over F1-score since there are no class imbalances and both false positives and false negatives are equally bad for the model. The features used will be statistics that will be known at the end of a game, meaning that the time of prediction will allow for most of the data from the dataset to be used.
 
 # Baseline Model
 
@@ -25,9 +25,9 @@ The model chosen was a DecisionTreeClassifier with the only hyperparameter being
 |      0 |      16 |        3 |        39 |         4 |        2 |           346 |        1 |
 |      1 |      13 |        6 |        35 |         2 |        1 |           162 |        1 |
 
-There is 1 nominal feature (‘side’) and 6 quantitative features (‘kills’, ‘deaths’, ‘assists’, ‘dragons’, ‘barons’, ‘visionscore’). The quantitative columns were left mostly alone with the main change being the data types to their appropriate encodings. The ‘side’ feature was one-hot encoded with ‘Blue’ represented as 1 and ‘Red’ represented as 0.
+There is 1 nominal feature (‘side’) and 6 quantitative features (‘kills’, ‘deaths’, ‘assists’, ‘dragons’, ‘barons’, ‘visionscore’). The quantitative columns were left mostly alone with the main change being their data types to the appropriate encodings. The ‘side’ feature was one-hot encoded with ‘Blue’ represented as 1 and ‘Red’ represented as 0.
 
-After the model was fit on the training data, the accuracy score on the training data was ~0.892 while the accuracy score on the test data was ~0.889. While the model’s accuracy was not groundbreaking, the model is not “bad”. This is because the model’s accuracy score on the test data was only a little behind the accuracy score of the training data. This means that the model does well with unseen data, and with some changes, the accuracy score can increase.
+After the model was fit on the training data, the accuracy score on the training data was ~0.892 while the accuracy score on the test data was ~0.889. While the model’s accuracy was not groundbreaking, the model is not “bad”. This is because the model’s accuracy score on the test data was only a little behind the accuracy score of the training data. This means that the model does well with unseen data, and with some changes, the accuracy score can be improved upon.
 
 # Final Model
 
@@ -35,7 +35,7 @@ While creating the final model, four new features were added. Three of them cons
 
 <iframe src="assets/kills-hist.html" width=650 height=450 frameBorder=0></iframe>
 
-The RobustScaler was used to remedy this to ensure that extreme numbers are not automatically seen as a certain result. RobustScaler was used instead of StandardScaler to account for outliers since RobustScaler uses median and interquartile range within its calculations in comparison to the mean and standard deviation which are both affected by outliers.
+The RobustScaler was used to remedy this to ensure that extreme numbers were not automatically seen as a certain result. RobustScaler was used instead of StandardScaler to account for outliers since RobustScaler uses median and interquartile range within its calculations in comparison to the mean and standard deviation which are both affected by outliers.
 
 The last new feature that was created was using the KBinsDiscretizer from sklearn on ‘visionscore’. The reasoning behind this was when drawn on a histogram, ‘visionscore’ was roughly normally distributed but had a lot of outliers.
 
@@ -51,17 +51,15 @@ The model chosen was still the DecisionTreeClassifier. To find the best hyperpar
 - criterion: To find the best criterion to split a node, and
 - splitter: To find how to best split the features to split a node.
 
-The hyperparameters that optimized the model the best were:
+The hyperparameters that were fround by GridSearchCv that optimized the model the best were:
 - max_depth = 8,
 - min_samples_split = 20,
 - criterion = ‘entropy’, and
 - splitter = ‘best’.
 
-
-After the model was fit on the training data, the accuracy score on the training data was ~0.964 while the accuracy score on the test data was ~0.956. This is an obvious increase in performance of the model as the accuracy score increased in both the training and test data. As explained earlier, the new features have a part in this increase in performance by keeping the weights of the data similar. The optimized hyperparameters were also a factor in the improvement. With the increase to max_depth, the tree is able to classify data to a better degree since the decisions it makes are more specific. The other hyperparameters were not used in the baseline model, and with their introductions into the final model, also ensure that the tree is splitting correctly and not splitting when there is not enough data.
+After the model was fit on the training data, the accuracy score on the training data was ~0.964 while the accuracy score on the test data was ~0.956. This is an obvious increase in performance of the model as the accuracy score increased in both the training and test data. As explained earlier, the new features have a part in this increase in performance by keeping the weights of the data similar. The optimized hyperparameters were also a factor in the improvement. With the increase to max_depth, the tree is able to classify data to a better degree since the decisions it makes are more specific. The other hyperparameters were not used in the baseline model, and with their introductions to the final model, also ensure that the tree is splitting correctly and not splitting when there is not enough data.
 
 <img src="assets/confusion-matrix.png" width=600 height=450>
-
 
 # Fairness Analysis
 
@@ -77,4 +75,4 @@ With the test statistic being accuracy score, the significance level is set at 0
 
 <iframe src="assets/perm-fig.html" width=650 height=450 frameBorder=0></iframe>
 
-The resulting p-value is 0.0 and thus the null hypothesis is rejected. Based on these results, we can infer that the model can be more accurate towards data that contains single digits in kills. This is probably caused by the lower kill counts usually resulting in losses. In contrast, some of the mid-range kill counts can be classified as either a loss or a win. This mid-range may cause the model to be inaccurate, resulting in the calculated p-value.
+The resulting p-value is 0.0 and thus the null hypothesis is rejected. Based on these results, we can infer that the model can be more accurate towards data that contains single digits in kills. This is probably caused by the lower kill counts usually resulting in losses within the data. In contrast, some of the mid-range kill counts can be classified as either a loss or a win. This mid-range may cause the model to be inaccurate, resulting in the calculated p-value.
