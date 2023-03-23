@@ -51,7 +51,7 @@ The model chosen was still the DecisionTreeClassifier. To find the best hyperpar
 
 **ADD MODEL PERFORMANCE AND HYPERPARAMETERS**
 
-<img src="assets/confusion-matrix.png" width=650 height=450>
+<img src="assets/confusion-matrix.png" width=600 height=450>
 
 
 # Fairness Analysis
